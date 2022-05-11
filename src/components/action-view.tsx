@@ -17,7 +17,7 @@ export const ActionView: React.FC = () => {
 
     return (
         <CodeBlock>
-            {emittedActions.map((action: string) => <pre key={action}>{action}</pre>)}
+            {emittedActions.map((action: string, index: number) => <pre key={action + index.toString()}>{action}</pre>)}
         </CodeBlock>
     )
 }

@@ -1,19 +1,36 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+
+import {decrement, increment, InteractionsAction} from "../interactions-slice";
+import {connect} from "react-redux";
 import {RootState} from "../store";
-import {decrement, increment} from "../interactions-slice";
+import {Dispatch} from "redux";
 
+interface PropsT {
+    increment: () => InteractionsAction;
+    decrement: () => InteractionsAction;
+    count: number
 
-export const Counter: React.FC = () => {
+}
+
+export const Counter: React.FC<PropsT> = ({ increment, decrement, count }) => {
     // Get the count
-    const count = useSelector((state: RootState) => state.interactions.count)
-    const dispatcher = useDispatch()
 
     return (
         <>
             Count: {count}
-            <button onClick={() => dispatcher(increment())}>Increment</button>
-            <button onClick={() => dispatcher(decrement())}>Decrement</button>
+            <button onClick={() => increment()}>Increment</button>
+            <button onClick={() => decrement()}>Decrement</button>
         </>
     )
 }
+
+const mapStateToProps = (state: RootState) => ({
+    count: state.interactions.count
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    increment: () => dispatch(increment()),
+    decrement: () => dispatch(decrement())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)

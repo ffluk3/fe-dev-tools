@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import {Counter} from "./components/counter";
+import Counter from "./components/counter";
 import {ActionEmitter} from "./components/action-emitter";
 import styled from "@emotion/styled";
 import {ActionView} from "./components/action-view";
